@@ -1,0 +1,305 @@
+{
+  "timestamp_utc": "2026-10-20T16:31:58.329032+00:00",
+  "runtime_seconds": 7.31,
+  "dataset_metadata": {
+    "file_sha256": "ab79e8144aa4cb9b786a35349df944ed7db5b29738069ce38df1f545c306865e",
+    "total_records": 7648,
+    "train_records": 6135,
+    "test_records": 1513,
+    "train_districts_count": 32,
+    "test_districts_count": 8,
+    "feature_names": [
+      "s2_ndvi",
+      "s2_ndwi",
+      "s2_ndre",
+      "s2_msavi",
+      "smap_sm_pct"
+    ],
+    "missing_train": {
+      "s2_ndvi": 0,
+      "s2_ndwi": 0,
+      "s2_ndre": 0,
+      "s2_msavi": 0,
+      "smap_sm_pct": 0
+    },
+    "missing_test": {
+      "s2_ndvi": 7,
+      "s2_ndwi": 7,
+      "s2_ndre": 7,
+      "s2_msavi": 7,
+      "smap_sm_pct": 0
+    }
+  },
+  "threshold_optimization": {
+    "rf_severe_threshold": 0.27,
+    "rf_oof_severe_f1": 0.0462,
+    "rf_oof_severe_recall": 0.1964,
+    "rf_oof_severe_precision": 0.0262,
+    "rf_oof_severe_pr_auc": 0.0213,
+    "hgb_severe_threshold": 0.02,
+    "hgb_oof_severe_f1": 0.04,
+    "hgb_oof_severe_recall": 0.6964,
+    "hgb_oof_severe_precision": 0.0206,
+    "hgb_oof_severe_pr_auc": 0.0269
+  },
+  "held_out_pr_auc": {
+    "positive_class": "Severe Stress (code 2)",
+    "calculation_method": "Scikit-learn precision_recall_curve integrated via trapezoidal auc()",
+    "random_forest_pr_auc": 0.0659,
+    "hist_gradient_boosting_pr_auc": 0.0488,
+    "base_rate": 0.0549
+  },
+  "cv_results": {
+    "rule_baseline": {
+      "macro_f1_mean": 0.2842,
+      "macro_f1_std": 0.0372,
+      "balanced_accuracy_mean": 0.3196,
+      "balanced_accuracy_std": 0.0115,
+      "severe_recall_mean": 0.1304,
+      "severe_recall_std": 0.0972,
+      "severe_precision_mean": 0.0165,
+      "severe_precision_std": 0.0127
+    },
+    "random_forest": {
+      "macro_f1_mean": 0.3251,
+      "macro_f1_std": 0.0304,
+      "balanced_accuracy_mean": 0.3459,
+      "balanced_accuracy_std": 0.0248,
+      "severe_recall_mean": 0.07,
+      "severe_recall_std": 0.0858,
+      "severe_precision_mean": 0.0179,
+      "severe_precision_std": 0.0146
+    },
+    "hist_gradient_boosting": {
+      "macro_f1_mean": 0.3222,
+      "macro_f1_std": 0.0169,
+      "balanced_accuracy_mean": 0.3292,
+      "balanced_accuracy_std": 0.0116,
+      "severe_recall_mean": 0.0294,
+      "severe_recall_std": 0.0432,
+      "severe_precision_mean": 0.006,
+      "severe_precision_std": 0.0082
+    }
+  },
+  "held_out_test_evaluations": [
+    {
+      "model_name": "Deterministic Rule Baseline",
+      "macro_f1": 0.3053,
+      "balanced_accuracy": 0.3911,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.7826,
+          "recall": 0.0762,
+          "f1": 0.1388,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4921,
+          "recall": 0.8682,
+          "f1": 0.6282,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.1105,
+          "recall": 0.2289,
+          "f1": 0.149,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          54,
+          582,
+          73
+        ],
+        [
+          15,
+          626,
+          80
+        ],
+        [
+          0,
+          64,
+          19
+        ]
+      ]
+    },
+    {
+      "model_name": "Random Forest 5-Feat (Standard Argmax)",
+      "macro_f1": 0.3062,
+      "balanced_accuracy": 0.3075,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4229,
+          "recall": 0.3597,
+          "f1": 0.3887,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4304,
+          "recall": 0.5146,
+          "f1": 0.4687,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.0833,
+          "recall": 0.0482,
+          "f1": 0.0611,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          255,
+          435,
+          19
+        ],
+        [
+          325,
+          371,
+          25
+        ],
+        [
+          23,
+          56,
+          4
+        ]
+      ]
+    },
+    {
+      "model_name": "Random Forest 5-Feat (Tuned Severe T=0.27)",
+      "macro_f1": 0.2999,
+      "balanced_accuracy": 0.3069,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4252,
+          "recall": 0.3329,
+          "f1": 0.3734,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4207,
+          "recall": 0.4674,
+          "f1": 0.4428,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.0637,
+          "recall": 0.1205,
+          "f1": 0.0833,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          236,
+          414,
+          59
+        ],
+        [
+          296,
+          337,
+          88
+        ],
+        [
+          23,
+          50,
+          10
+        ]
+      ]
+    },
+    {
+      "model_name": "HistGradientBoosting 5-Feat (Standard Argmax)",
+      "macro_f1": 0.297,
+      "balanced_accuracy": 0.2992,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4174,
+          "recall": 0.3456,
+          "f1": 0.3781,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4471,
+          "recall": 0.516,
+          "f1": 0.4791,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.0319,
+          "recall": 0.0361,
+          "f1": 0.0339,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          245,
+          408,
+          56
+        ],
+        [
+          314,
+          372,
+          35
+        ],
+        [
+          28,
+          52,
+          3
+        ]
+      ]
+    },
+    {
+      "model_name": "HistGradientBoosting 5-Feat (Tuned Severe T=0.02)",
+      "macro_f1": 0.0865,
+      "balanced_accuracy": 0.2748,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.3256,
+          "recall": 0.0197,
+          "f1": 0.0372,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4338,
+          "recall": 0.0818,
+          "f1": 0.1377,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.045,
+          "recall": 0.7229,
+          "f1": 0.0847,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          14,
+          63,
+          632
+        ],
+        [
+          20,
+          59,
+          642
+        ],
+        [
+          9,
+          14,
+          60
+        ]
+      ]
+    }
+  ],
+  "feature_importances": {
+    "random_forest_5feat": {
+      "smap_sm_pct": 0.4537,
+      "s2_ndwi": 0.1567,
+      "s2_ndre": 0.135,
+      "s2_msavi": 0.1299,
+      "s2_ndvi": 0.1248
+    }
+  }
+}

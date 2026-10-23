@@ -25,6 +25,11 @@ try:
 except ImportError:
     from khetsense.whatsapp.registration_flow import handle_incoming, mask_phone
 
+try:
+    from common.config import verify_meta_signature, is_sender_allowed, get_max_webhook_body_bytes
+except ImportError:
+    from khetsense.common.config import verify_meta_signature, is_sender_allowed, get_max_webhook_body_bytes
+
 # Configure UTF-8 encoding on Windows console for both stdout and stderr
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -109,6 +114,85 @@ async def verify_webhook(
     raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Verification token mismatch")
 
 
+async def read_request_body_with_limit(request: Request, max_bytes: int) -> bytes:
+    """
+    Safely reads and buffers the incoming request body up to max_bytes.
+    Enforces a strict upper bound to prevent unbounded in-memory buffering.
+    Rejects oversized payloads with HTTP 413 (Payload Too Large).
+    """
+    # 1. Fast rejection if Content-Length header is present and exceeds max_bytes
+    content_length = request.headers.get("content-length")
+    if content_length:
+        try:
+            cl = int(content_length.strip())
+            if cl > max_bytes:
+                logger.warning(
+                    "Rejected webhook request: Content-Length %s exceeds limit of %s bytes",
+                    cl, max_bytes,
+                )
+                raise HTTPException(
+                    status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                    detail=f"Request body exceeds maximum permitted size of {max_bytes} bytes",
+                )
+        except ValueError:
+            pass
+
+    # 2. Check if request body was already cached/buffered (e.g. pre-buffered test mocks or Starlette cache)
+    if hasattr(request, "_body") and request._body is not None:
+        if len(request._body) > max_bytes:
+            logger.warning(
+                "Rejected webhook request: Cached body size %s exceeds limit of %s bytes",
+                len(request._body), max_bytes,
+            )
+            raise HTTPException(
+                status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                detail=f"Request body exceeds maximum permitted size of {max_bytes} bytes",
+            )
+        return request._body
+
+    # 3. Stream chunks if request provides an async stream() method (ASGI streaming)
+    if hasattr(request, "stream") and callable(request.stream):
+        chunks = []
+        total_size = 0
+        try:
+            async for chunk in request.stream():
+                total_size += len(chunk)
+                if total_size > max_bytes:
+                    logger.warning(
+                        "Rejected webhook request: Streamed body exceeded limit of %s bytes (aborted at %s bytes)",
+                        max_bytes, total_size,
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                        detail=f"Request body exceeds maximum permitted size of {max_bytes} bytes",
+                    )
+                chunks.append(chunk)
+            raw_body = b"".join(chunks)
+            request._body = raw_body
+            return raw_body
+        except HTTPException:
+            raise
+        except Exception as e:
+            logger.error("Error reading request stream: %s", e)
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Failed to read request stream")
+
+    # 4. Fallback for mock objects that define await request.body()
+    if hasattr(request, "body") and callable(request.body):
+        raw_body = await request.body()
+        if len(raw_body) > max_bytes:
+            logger.warning(
+                "Rejected webhook request: Body size %s exceeds limit of %s bytes",
+                len(raw_body), max_bytes,
+            )
+            raise HTTPException(
+                status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                detail=f"Request body exceeds maximum permitted size of {max_bytes} bytes",
+            )
+        return raw_body
+
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid request object")
+
+
 # ==============================================================================
 # 2. INCOMING WHATSAPP MESSAGE EVENT HANDLER (POST /webhook)
 # ==============================================================================
@@ -116,6 +200,8 @@ async def verify_webhook(
 async def receive_whatsapp_event(request: Request, background_tasks: BackgroundTasks):
     """
     Receives incoming WhatsApp Cloud API events from Meta:
+    - Enforces maximum request-body size limit (HTTP 413) before unbounded buffering
+    - Validates Meta Webhook Signature (X-Hub-Signature-256 HMAC-SHA256)
     - Parses sender phone number (from)
     - Parses sender profile name
     - Identifies message type ('text', 'location', 'interactive', etc.)
@@ -123,8 +209,22 @@ async def receive_whatsapp_event(request: Request, background_tasks: BackgroundT
     - Offloads message handling to FastAPI BackgroundTask (sub-3s SLA)
     - Returns HTTP 200 OK immediately to satisfy Meta's 3-second delivery SLA
     """
+    # 1. Enforce Maximum Request Body Size Limit before buffering unlimited bytes
+    max_bytes = get_max_webhook_body_bytes()
+    raw_body = await read_request_body_with_limit(request, max_bytes=max_bytes)
+
+    # 2. Verify Meta Webhook Signature (X-Hub-Signature-256)
+    sig_header = request.headers.get("X-Hub-Signature-256")
+    is_valid, reason = verify_meta_signature(raw_body, sig_header)
+    if not is_valid:
+        logger.warning("Rejected webhook request: %s", reason)
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Invalid webhook signature: {reason}",
+        )
+
     try:
-        body = await request.json()
+        body = json.loads(raw_body.decode("utf-8")) if raw_body else {}
     except Exception as e:
         logger.error("Failed to parse request JSON: %s", e)
         return JSONResponse(content={"status": "invalid_json"}, status_code=400)
@@ -216,6 +316,15 @@ async def receive_whatsapp_event(request: Request, background_tasks: BackgroundT
                     print(f"  Other Payload:    {msg.get(msg_type)}")
 
                 print("=" * 70 + "\n")
+
+                # Allowlist check (Phase 6H)
+                if not is_sender_allowed(sender_mobile):
+                    logger.warning(
+                        "[ALLOWLIST] Sender %s is not in the authorized allowlist. Discarding message %s.",
+                        mask_phone(sender_mobile),
+                        msg_id,
+                    )
+                    continue
 
                 # Dispatch conversation state machine in background (sub-3s Meta SLA)
                 background_tasks.add_task(handle_incoming, msg, contact_name)

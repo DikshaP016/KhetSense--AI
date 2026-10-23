@@ -1,0 +1,104 @@
+{
+  "manifest_version": "1.0.0",
+  "phase": "Phase 3: Historical Feature Extraction and Offline Dataset Preparation",
+  "created_at_utc": "2026-10-18T17:26:04Z",
+  "source_ground_truth": {
+    "dataset_name": "Landscape diagnostic survey data of wheat production practices and yield of 2018 from eastern India",
+    "persistent_identifier": "hdl:11529/10548507",
+    "repository": "CIMMYT Research Data & Software Repository Network",
+    "license": "Custom Open Access / CC-BY 4.0 compliant",
+    "source_csv": "data/research_benchmark/csisa_wheat_2018/CSISA_IND_LDS_Whe_2018_Data.csv",
+    "source_csv_sha256": "1f6642b4a5d637090498bed2e70bb77b3758634292eb2c0945bac92178a33d77"
+  },
+  "satellite_and_weather_sources": [
+    {
+      "sensor": "Sentinel-2 MultiSpectral Instrument (MSI)",
+      "collection": "COPERNICUS/S2_SR_HARMONIZED (Google Earth Engine)",
+      "bands_used": [
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B8",
+        "B11",
+        "QA60"
+      ],
+      "indices_derived": [
+        "NDVI",
+        "NDWI",
+        "NDRE",
+        "MSAVI"
+      ],
+      "spatial_resolution": "10m (B2, B3, B4, B8) and 20m (B5, B11)",
+      "observation_window": "2018-01-15 to 2018-02-28 (Peak vegetative/flowering)",
+      "cloud_filter": "CLOUDY_PIXEL_PERCENTAGE < 20 and QA60 cloud/cirrus bitmask",
+      "provider": "European Space Agency (ESA) Copernicus Programme"
+    },
+    {
+      "sensor": "NASA SMAP Radiometer",
+      "collection": "NASA/SMAP/SPL3SMP_E/006 (Google Earth Engine)",
+      "bands_used": [
+        "soil_moisture_am",
+        "soil_moisture_pm"
+      ],
+      "spatial_resolution": "9 km gridded",
+      "observation_window": "2018-01-15 to 2018-02-28",
+      "units": "Volumetric Soil Moisture percentage (0 - 100%)",
+      "provider": "NASA Jet Propulsion Laboratory / NSIDC DAAC"
+    },
+    {
+      "sensor": "ECMWF ERA5-Land Reanalysis",
+      "collection": "ECMWF/ERA5_LAND/DAILY_AGGR (Google Earth Engine)",
+      "bands_used": [
+        "total_precipitation_sum",
+        "temperature_2m",
+        "temperature_2m_max",
+        "dewpoint_temperature_2m"
+      ],
+      "features_derived": [
+        "era5_precip_season_mm",
+        "era5_temp_mean_c",
+        "era5_temp_max_c",
+        "era5_vpd_mean_kpa"
+      ],
+      "spatial_resolution": "0.1 degree (~9-11 km)",
+      "observation_window": "2017-12-01 to 2018-03-31 (Full crop season)",
+      "units": "Precipitation (mm), Temperature (C), Vapor Pressure Deficit (kPa)",
+      "provider": "ECMWF Copernicus Climate Change Service"
+    }
+  ],
+  "produced_artifacts": [
+    {
+      "filename": "csisa_wheat_multisensor_features_2018.csv",
+      "relative_path": "data/research_benchmark/csisa_wheat_multisensor_features_2018.csv",
+      "size_bytes": 1817834,
+      "sha256": "ab79e8144aa4cb9b786a35349df944ed7db5b29738069ce38df1f545c306865e",
+      "row_count": 7648,
+      "column_count": 34,
+      "description": "Primary uncompressed research benchmark dataset"
+    },
+    {
+      "filename": "csisa_wheat_multisensor_features_2018.csv.gz",
+      "relative_path": "data/research_benchmark/csisa_wheat_multisensor_features_2018.csv.gz",
+      "size_bytes": 225325,
+      "sha256": "d92834e6112fc93e4d4b991458f81a458b12f53166862e9ba920801ab7d9ba70",
+      "row_count": 7648,
+      "column_count": 34,
+      "description": "Gzip-compressed portable research benchmark dataset"
+    },
+    {
+      "filename": "extract_historical_features.py",
+      "relative_path": "data/research_benchmark/extract_historical_features.py",
+      "size_bytes": 16954,
+      "sha256": "f84c2967b58d594e20f7647ef6ea5ab9e66d6f4af3233c11bd3d8b8fcd3991a5",
+      "description": "Deterministic Python/GEE extraction script"
+    },
+    {
+      "filename": "extraction_metrics.json",
+      "relative_path": "data/research_benchmark/extraction_metrics.json",
+      "size_bytes": 785,
+      "sha256": "347e49997e83ba0489938bf52ac6f261f1b9de451f236c878a43c696f014b9af",
+      "description": "Machine-readable extraction metrics and split records"
+    }
+  ]
+}

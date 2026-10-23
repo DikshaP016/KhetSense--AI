@@ -1,7 +1,6 @@
 # Credentials and sensitive secrets
 /credentials/
 credentials/
-*.json
 *.pem
 *.key
 .env
@@ -52,3 +51,10 @@ venv.bak/
 # Operating System artifacts
 .DS_Store
 Thumbs.db
+
+
+# Trained ML models and generated datasets
+*.joblib
+data/research_benchmark/csisa_wheat_2018/
+data/research_benchmark/*.csv
+data/research_benchmark/*.csv.gz

@@ -1,0 +1,10 @@
+{
+  "generated_utc": "2026-10-20T16:31:58.330630+00:00",
+  "phase": "Phase 7F Live-Native Five-Feature Model",
+  "artifacts": {
+    "preprocessor_5feat.joblib": "616128656d1c422cc6292189cb0e045e5e15dc29dff24ab96bf4237740483467",
+    "random_forest_5feat.joblib": "a8b10f1fa5c2b89e6f80b4bfc88273ad40af28d589260c3fa263229cb505e503",
+    "hist_gradient_boosting_5feat.joblib": "3ae7ef4309544f4ab279be5ac1692dd710d2784a90dbdd0f2cc9e0e4bdd00f14",
+    "evaluation_metrics_5feat.json": "c7f6dfb64d4926d93218e06b136506b50e68624ffb13e0872eb18df6f7fefcee"
+  }
+}

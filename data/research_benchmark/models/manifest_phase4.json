@@ -1,0 +1,50 @@
+{
+  "manifest_version": "1.0.0",
+  "phase": "Phase 4: Offline Model Training, Spatial Cross-Validation and Benchmarking",
+  "created_at_utc": "2026-10-18T17:56:10.933151+00:00",
+  "source_dataset_sha256": "ab79e8144aa4cb9b786a35349df944ed7db5b29738069ce38df1f545c306865e",
+  "artifacts": [
+    {
+      "filename": "train_models.py",
+      "path": "data/research_benchmark/train_models.py",
+      "sha256": "92ff79c77e15b41a4f099831b870a959be11f3270e6f6676932cc05a514af48a",
+      "description": "Reproducible Python training, cross-validation, and evaluation pipeline"
+    },
+    {
+      "filename": "preprocessor.joblib",
+      "path": "data/research_benchmark/models/preprocessor.joblib",
+      "sha256": "20bb77ff91674d0c81fd8004ec338913fed577b78d5b827b9a3ea89d38fc4b53",
+      "description": "SimpleImputer (median) and StandardScaler fitted strictly on train partition"
+    },
+    {
+      "filename": "logistic_regression.joblib",
+      "path": "data/research_benchmark/models/logistic_regression.joblib",
+      "sha256": "6a5d1014ff1685ac8b27dca54997b299e1c398f23a6a1da710732c73eb1c8c74",
+      "description": "Multinomial Logistic Regression with balanced class weights and L2 penalty"
+    },
+    {
+      "filename": "random_forest.joblib",
+      "path": "data/research_benchmark/models/random_forest.joblib",
+      "sha256": "dccd55f0e860a61dacd1d1d45c7a036f6b010e0575bcf172942b10f2e6679bf6",
+      "description": "Random Forest Classifier (150 trees, max_depth=8, balanced class weights)"
+    },
+    {
+      "filename": "hist_gradient_boosting.joblib",
+      "path": "data/research_benchmark/models/hist_gradient_boosting.joblib",
+      "sha256": "c761639853b8dd2f1b4f79a41197b37e790c9a9c64a10522c56b19839cc20471",
+      "description": "HistGradientBoosting Classifier (LightGBM-style gradient boosting)"
+    },
+    {
+      "filename": "rule_baseline_metadata.json",
+      "path": "data/research_benchmark/models/rule_baseline_metadata.json",
+      "sha256": "538d1c9776ccd7fff0d58f90111d2a45cfb2fdde86fb0d53048f649c9f4b2e46",
+      "description": "Specification of KhetSense deterministic rule baseline thresholds"
+    },
+    {
+      "filename": "evaluation_metrics.json",
+      "path": "data/research_benchmark/models/evaluation_metrics.json",
+      "sha256": "efb6a5687d159ff7eea89c98c39b9b89eda7625788bbcabde2174eb2f74f0d25",
+      "description": "Full machine-readable evaluation metrics across all CV folds and held-out test set"
+    }
+  ]
+}

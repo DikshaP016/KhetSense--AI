@@ -1,0 +1,374 @@
+{
+  "timestamp_utc": "2026-10-18T17:56:10.929824+00:00",
+  "runtime_seconds": 12.33,
+  "audit_metadata": {
+    "file_sha256": "ab79e8144aa4cb9b786a35349df944ed7db5b29738069ce38df1f545c306865e",
+    "total_rows": 7648,
+    "train_rows": 6135,
+    "test_rows": 1513,
+    "train_districts_count": 32,
+    "test_districts_count": 8,
+    "missing_train": {
+      "s2_ndvi": 0,
+      "s2_ndwi": 0,
+      "s2_ndre": 0,
+      "s2_msavi": 0,
+      "smap_sm_pct": 0,
+      "era5_precip_season_mm": 0,
+      "era5_temp_mean_c": 0,
+      "era5_temp_max_c": 0,
+      "era5_vpd_mean_kpa": 0
+    },
+    "missing_test": {
+      "s2_ndvi": 7,
+      "s2_ndwi": 7,
+      "s2_ndre": 7,
+      "s2_msavi": 7,
+      "smap_sm_pct": 0,
+      "era5_precip_season_mm": 0,
+      "era5_temp_mean_c": 0,
+      "era5_temp_max_c": 0,
+      "era5_vpd_mean_kpa": 0
+    }
+  },
+  "environment": {
+    "python_version": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "sklearn_version": "1.8.0",
+    "numpy_version": "2.2.6",
+    "pandas_version": "2.3.3",
+    "joblib_version": "1.5.3",
+    "xgboost_available": false,
+    "xgboost_reason": "Not installed in Python 3.13 environment; dependency installation restricted by project directives"
+  },
+  "threshold_optimization": {
+    "rf_severe_threshold": 0.33,
+    "rf_oof_severe_f1": 0.0408,
+    "rf_oof_severe_recall": 0.0625,
+    "rf_oof_severe_precision": 0.0303,
+    "rf_oof_severe_pr_auc": 0.0188,
+    "hgb_severe_threshold": 0.41000000000000003,
+    "hgb_oof_severe_f1": 0.0405,
+    "hgb_oof_severe_recall": 0.0446,
+    "hgb_oof_severe_precision": 0.037
+  },
+  "cv_results": {
+    "rule_baseline": {
+      "macro_f1_mean": 0.2842,
+      "macro_f1_std": 0.0372,
+      "balanced_accuracy_mean": 0.3196,
+      "balanced_accuracy_std": 0.0115,
+      "severe_recall_mean": 0.1304,
+      "severe_recall_std": 0.0972,
+      "severe_precision_mean": 0.0165,
+      "severe_precision_std": 0.0127
+    },
+    "logistic_regression": {
+      "macro_f1_mean": 0.2969,
+      "macro_f1_std": 0.073,
+      "balanced_accuracy_mean": 0.3755,
+      "balanced_accuracy_std": 0.1088,
+      "severe_recall_mean": 0.3982,
+      "severe_recall_std": 0.2478,
+      "severe_precision_mean": 0.0443,
+      "severe_precision_std": 0.0515
+    },
+    "random_forest": {
+      "macro_f1_mean": 0.3398,
+      "macro_f1_std": 0.0416,
+      "balanced_accuracy_mean": 0.3606,
+      "balanced_accuracy_std": 0.0384,
+      "severe_recall_mean": 0.0556,
+      "severe_recall_std": 0.1111,
+      "severe_precision_mean": 0.0078,
+      "severe_precision_std": 0.0155
+    },
+    "hist_gradient_boosting": {
+      "macro_f1_mean": 0.353,
+      "macro_f1_std": 0.0111,
+      "balanced_accuracy_mean": 0.3645,
+      "balanced_accuracy_std": 0.008,
+      "severe_recall_mean": 0.0444,
+      "severe_recall_std": 0.0889,
+      "severe_precision_mean": 0.0094,
+      "severe_precision_std": 0.0188
+    }
+  },
+  "held_out_test_evaluations": [
+    {
+      "model_name": "Deterministic Rule Baseline",
+      "macro_f1": 0.3053,
+      "balanced_accuracy": 0.3911,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.7826,
+          "recall": 0.0762,
+          "f1": 0.1388,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4921,
+          "recall": 0.8682,
+          "f1": 0.6282,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.1105,
+          "recall": 0.2289,
+          "f1": 0.149,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          54,
+          582,
+          73
+        ],
+        [
+          15,
+          626,
+          80
+        ],
+        [
+          0,
+          64,
+          19
+        ]
+      ]
+    },
+    {
+      "model_name": "Regularized Logistic Regression (Balanced)",
+      "macro_f1": 0.2771,
+      "balanced_accuracy": 0.4679,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4718,
+          "recall": 0.6615,
+          "f1": 0.5508,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.1207,
+          "recall": 0.0194,
+          "f1": 0.0335,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.1489,
+          "recall": 0.7229,
+          "f1": 0.2469,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          469,
+          102,
+          138
+        ],
+        [
+          502,
+          14,
+          205
+        ],
+        [
+          23,
+          0,
+          60
+        ]
+      ]
+    },
+    {
+      "model_name": "Random Forest (Standard Argmax)",
+      "macro_f1": 0.3115,
+      "balanced_accuracy": 0.3136,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.448,
+          "recall": 0.5472,
+          "f1": 0.4927,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4062,
+          "recall": 0.3454,
+          "f1": 0.3733,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.1176,
+          "recall": 0.0482,
+          "f1": 0.0684,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          388,
+          307,
+          14
+        ],
+        [
+          456,
+          249,
+          16
+        ],
+        [
+          22,
+          57,
+          4
+        ]
+      ]
+    },
+    {
+      "model_name": "Random Forest (Tuned Severe Threshold T=0.33)",
+      "macro_f1": 0.3405,
+      "balanced_accuracy": 0.3397,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4447,
+          "recall": 0.5388,
+          "f1": 0.4872,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4088,
+          "recall": 0.3356,
+          "f1": 0.3686,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.1935,
+          "recall": 0.1446,
+          "f1": 0.1655,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          382,
+          301,
+          26
+        ],
+        [
+          455,
+          242,
+          24
+        ],
+        [
+          22,
+          49,
+          12
+        ]
+      ]
+    },
+    {
+      "model_name": "HistGradientBoosting (Standard Argmax)",
+      "macro_f1": 0.3314,
+      "balanced_accuracy": 0.3323,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4682,
+          "recall": 0.5303,
+          "f1": 0.4974,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4529,
+          "recall": 0.4064,
+          "f1": 0.4284,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.0794,
+          "recall": 0.0602,
+          "f1": 0.0685,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          376,
+          300,
+          33
+        ],
+        [
+          403,
+          293,
+          25
+        ],
+        [
+          24,
+          54,
+          5
+        ]
+      ]
+    },
+    {
+      "model_name": "HistGradientBoosting (Tuned Severe Threshold T=0.41)",
+      "macro_f1": 0.3329,
+      "balanced_accuracy": 0.3337,
+      "per_class": {
+        "no_stress": {
+          "precision": 0.4704,
+          "recall": 0.5374,
+          "f1": 0.5016,
+          "support": 709
+        },
+        "mild_stress": {
+          "precision": 0.4512,
+          "recall": 0.4036,
+          "f1": 0.4261,
+          "support": 721
+        },
+        "severe_stress": {
+          "precision": 0.0862,
+          "recall": 0.0602,
+          "f1": 0.0709,
+          "support": 83
+        }
+      },
+      "confusion_matrix": [
+        [
+          381,
+          300,
+          28
+        ],
+        [
+          405,
+          291,
+          25
+        ],
+        [
+          24,
+          54,
+          5
+        ]
+      ]
+    }
+  ],
+  "feature_importances": {
+    "random_forest": {
+      "smap_sm_pct": 0.2168,
+      "era5_precip_season_mm": 0.1993,
+      "era5_vpd_mean_kpa": 0.1405,
+      "era5_temp_max_c": 0.1183,
+      "era5_temp_mean_c": 0.0941,
+      "s2_ndwi": 0.066,
+      "s2_msavi": 0.062,
+      "s2_ndre": 0.055,
+      "s2_ndvi": 0.0481
+    },
+    "logistic_regression_severe_coef": {
+      "s2_ndwi": -0.5838,
+      "era5_vpd_mean_kpa": -0.568,
+      "smap_sm_pct": -0.2052,
+      "s2_ndvi": -0.097,
+      "s2_ndre": 0.0264,
+      "era5_temp_mean_c": 0.0605,
+      "era5_precip_season_mm": 0.215,
+      "era5_temp_max_c": 0.4926,
+      "s2_msavi": 0.5596
+    }
+  }
+}

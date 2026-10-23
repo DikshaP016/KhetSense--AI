@@ -1,0 +1,17 @@
+{
+  "model_type": "Deterministic Rule Baseline",
+  "description": "KhetSense pipeline/classifier.py threshold logic",
+  "rules": {
+    "ndvi": {
+      "> 0.6": "No Stress",
+      "0.3 - 0.6": "Mild Stress",
+      "< 0.3": "Severe Stress"
+    },
+    "soil_moisture_pct": {
+      "> 25.0": "No Stress",
+      "15.0 - 25.0": "Mild Stress",
+      "< 15.0": "Severe Stress"
+    },
+    "combination": "Worst-case heuristic max(NDVI, SMAP)"
+  }
+}

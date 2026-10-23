@@ -1,0 +1,22 @@
+{
+  "total_records_processed": 7648,
+  "valid_sentinel2_records": 7641,
+  "valid_smap_records": 7648,
+  "valid_era5_records": 7648,
+  "held_out_test_districts": [
+    "Arah",
+    "Araria",
+    "Arwal",
+    "Aurangabad",
+    "Balia",
+    "Banka",
+    "Begusarai",
+    "Chandauli"
+  ],
+  "held_out_test_records": 1513,
+  "train_cv_records": 6135,
+  "elapsed_seconds": 426.1884686946869,
+  "csv_path": "C:\\Users\\NIDEEKSHA\\Documents\\DEEKSHA\\MASTERS\\Research Project\\khetsense\\data\\research_benchmark\\csisa_wheat_multisensor_features_2018.csv",
+  "csv_gz_path": "C:\\Users\\NIDEEKSHA\\Documents\\DEEKSHA\\MASTERS\\Research Project\\khetsense\\data\\research_benchmark\\csisa_wheat_multisensor_features_2018.csv.gz",
+  "timestamp_utc": "2026-10-18T17:24:50Z"
+}

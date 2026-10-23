@@ -1,0 +1,699 @@
+{
+  "evaluation_metadata": {
+    "dataset_name": "CSISA Eastern India Wheat Multi-Sensor Research Benchmark",
+    "held_out_districts_count": 8,
+    "total_test_samples": 1513,
+    "class_order": [
+      "No Stress",
+      "Mild Stress",
+      "Severe Stress"
+    ],
+    "class_support": {
+      "No Stress (0)": 709,
+      "Mild Stress (1)": 721,
+      "Severe Stress (2)": 83
+    }
+  },
+  "models": {
+    "rule_baseline": {
+      "raw_confusion_matrix": [
+        [
+          54,
+          582,
+          73
+        ],
+        [
+          15,
+          626,
+          80
+        ],
+        [
+          0,
+          64,
+          19
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          7.62,
+          82.09,
+          10.3
+        ],
+        [
+          2.08,
+          86.82,
+          11.1
+        ],
+        [
+          0.0,
+          77.11,
+          22.89
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 54,
+          "FP": 15,
+          "FN": 655,
+          "TN": 789,
+          "precision": 0.7826,
+          "recall": 0.0762,
+          "f1_score": 0.1389,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 626,
+          "FP": 646,
+          "FN": 95,
+          "TN": 146,
+          "precision": 0.4921,
+          "recall": 0.8682,
+          "f1_score": 0.6282,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 19,
+          "FP": 153,
+          "FN": 64,
+          "TN": 1277,
+          "precision": 0.1105,
+          "recall": 0.2289,
+          "f1_score": 0.149,
+          "support": 83
+        }
+      }
+    },
+    "rf_5feat_argmax": {
+      "raw_confusion_matrix": [
+        [
+          255,
+          435,
+          19
+        ],
+        [
+          325,
+          371,
+          25
+        ],
+        [
+          23,
+          56,
+          4
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          35.97,
+          61.35,
+          2.68
+        ],
+        [
+          45.08,
+          51.46,
+          3.47
+        ],
+        [
+          27.71,
+          67.47,
+          4.82
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 255,
+          "FP": 348,
+          "FN": 454,
+          "TN": 456,
+          "precision": 0.4229,
+          "recall": 0.3597,
+          "f1_score": 0.3887,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 371,
+          "FP": 491,
+          "FN": 350,
+          "TN": 301,
+          "precision": 0.4304,
+          "recall": 0.5146,
+          "f1_score": 0.4687,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 4,
+          "FP": 44,
+          "FN": 79,
+          "TN": 1386,
+          "precision": 0.0833,
+          "recall": 0.0482,
+          "f1_score": 0.0611,
+          "support": 83
+        }
+      }
+    },
+    "rf_5feat_tuned_t027": {
+      "raw_confusion_matrix": [
+        [
+          236,
+          414,
+          59
+        ],
+        [
+          296,
+          337,
+          88
+        ],
+        [
+          23,
+          50,
+          10
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          33.29,
+          58.39,
+          8.32
+        ],
+        [
+          41.05,
+          46.74,
+          12.21
+        ],
+        [
+          27.71,
+          60.24,
+          12.05
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 236,
+          "FP": 319,
+          "FN": 473,
+          "TN": 485,
+          "precision": 0.4252,
+          "recall": 0.3329,
+          "f1_score": 0.3734,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 337,
+          "FP": 464,
+          "FN": 384,
+          "TN": 328,
+          "precision": 0.4207,
+          "recall": 0.4674,
+          "f1_score": 0.4428,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 10,
+          "FP": 147,
+          "FN": 73,
+          "TN": 1283,
+          "precision": 0.0637,
+          "recall": 0.1205,
+          "f1_score": 0.0833,
+          "support": 83
+        }
+      }
+    },
+    "hgb_5feat_argmax": {
+      "raw_confusion_matrix": [
+        [
+          245,
+          408,
+          56
+        ],
+        [
+          314,
+          372,
+          35
+        ],
+        [
+          28,
+          52,
+          3
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          34.56,
+          57.55,
+          7.9
+        ],
+        [
+          43.55,
+          51.6,
+          4.85
+        ],
+        [
+          33.73,
+          62.65,
+          3.61
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 245,
+          "FP": 342,
+          "FN": 464,
+          "TN": 462,
+          "precision": 0.4174,
+          "recall": 0.3456,
+          "f1_score": 0.3781,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 372,
+          "FP": 460,
+          "FN": 349,
+          "TN": 332,
+          "precision": 0.4471,
+          "recall": 0.516,
+          "f1_score": 0.4791,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 3,
+          "FP": 91,
+          "FN": 80,
+          "TN": 1339,
+          "precision": 0.0319,
+          "recall": 0.0361,
+          "f1_score": 0.0339,
+          "support": 83
+        }
+      }
+    },
+    "hgb_5feat_tuned_t002": {
+      "raw_confusion_matrix": [
+        [
+          14,
+          63,
+          632
+        ],
+        [
+          20,
+          59,
+          642
+        ],
+        [
+          9,
+          14,
+          60
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          1.97,
+          8.89,
+          89.14
+        ],
+        [
+          2.77,
+          8.18,
+          89.04
+        ],
+        [
+          10.84,
+          16.87,
+          72.29
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 14,
+          "FP": 29,
+          "FN": 695,
+          "TN": 775,
+          "precision": 0.3256,
+          "recall": 0.0197,
+          "f1_score": 0.0372,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 59,
+          "FP": 77,
+          "FN": 662,
+          "TN": 715,
+          "precision": 0.4338,
+          "recall": 0.0818,
+          "f1_score": 0.1376,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 60,
+          "FP": 1274,
+          "FN": 23,
+          "TN": 156,
+          "precision": 0.045,
+          "recall": 0.7229,
+          "f1_score": 0.0847,
+          "support": 83
+        }
+      }
+    },
+    "logreg_9feat_balanced": {
+      "raw_confusion_matrix": [
+        [
+          469,
+          102,
+          138
+        ],
+        [
+          502,
+          14,
+          205
+        ],
+        [
+          23,
+          0,
+          60
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          66.15,
+          14.39,
+          19.46
+        ],
+        [
+          69.63,
+          1.94,
+          28.43
+        ],
+        [
+          27.71,
+          0.0,
+          72.29
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 469,
+          "FP": 525,
+          "FN": 240,
+          "TN": 279,
+          "precision": 0.4718,
+          "recall": 0.6615,
+          "f1_score": 0.5508,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 14,
+          "FP": 102,
+          "FN": 707,
+          "TN": 690,
+          "precision": 0.1207,
+          "recall": 0.0194,
+          "f1_score": 0.0334,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 60,
+          "FP": 343,
+          "FN": 23,
+          "TN": 1087,
+          "precision": 0.1489,
+          "recall": 0.7229,
+          "f1_score": 0.2469,
+          "support": 83
+        }
+      }
+    },
+    "rf_9feat_argmax": {
+      "raw_confusion_matrix": [
+        [
+          388,
+          307,
+          14
+        ],
+        [
+          456,
+          249,
+          16
+        ],
+        [
+          22,
+          57,
+          4
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          54.72,
+          43.3,
+          1.97
+        ],
+        [
+          63.25,
+          34.54,
+          2.22
+        ],
+        [
+          26.51,
+          68.67,
+          4.82
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 388,
+          "FP": 478,
+          "FN": 321,
+          "TN": 326,
+          "precision": 0.448,
+          "recall": 0.5472,
+          "f1_score": 0.4927,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 249,
+          "FP": 364,
+          "FN": 472,
+          "TN": 428,
+          "precision": 0.4062,
+          "recall": 0.3454,
+          "f1_score": 0.3733,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 4,
+          "FP": 30,
+          "FN": 79,
+          "TN": 1400,
+          "precision": 0.1176,
+          "recall": 0.0482,
+          "f1_score": 0.0684,
+          "support": 83
+        }
+      }
+    },
+    "rf_9feat_tuned_t033": {
+      "raw_confusion_matrix": [
+        [
+          382,
+          301,
+          26
+        ],
+        [
+          455,
+          242,
+          24
+        ],
+        [
+          22,
+          49,
+          12
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          53.88,
+          42.45,
+          3.67
+        ],
+        [
+          63.11,
+          33.56,
+          3.33
+        ],
+        [
+          26.51,
+          59.04,
+          14.46
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 382,
+          "FP": 477,
+          "FN": 327,
+          "TN": 327,
+          "precision": 0.4447,
+          "recall": 0.5388,
+          "f1_score": 0.4872,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 242,
+          "FP": 350,
+          "FN": 479,
+          "TN": 442,
+          "precision": 0.4088,
+          "recall": 0.3356,
+          "f1_score": 0.3686,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 12,
+          "FP": 50,
+          "FN": 71,
+          "TN": 1380,
+          "precision": 0.1935,
+          "recall": 0.1446,
+          "f1_score": 0.1655,
+          "support": 83
+        }
+      }
+    },
+    "hgb_9feat_argmax": {
+      "raw_confusion_matrix": [
+        [
+          376,
+          300,
+          33
+        ],
+        [
+          403,
+          293,
+          25
+        ],
+        [
+          24,
+          54,
+          5
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          53.03,
+          42.31,
+          4.65
+        ],
+        [
+          55.89,
+          40.64,
+          3.47
+        ],
+        [
+          28.92,
+          65.06,
+          6.02
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 376,
+          "FP": 427,
+          "FN": 333,
+          "TN": 377,
+          "precision": 0.4682,
+          "recall": 0.5303,
+          "f1_score": 0.4973,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 293,
+          "FP": 354,
+          "FN": 428,
+          "TN": 438,
+          "precision": 0.4529,
+          "recall": 0.4064,
+          "f1_score": 0.4284,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 5,
+          "FP": 58,
+          "FN": 78,
+          "TN": 1372,
+          "precision": 0.0794,
+          "recall": 0.0602,
+          "f1_score": 0.0685,
+          "support": 83
+        }
+      }
+    },
+    "hgb_9feat_tuned_t041": {
+      "raw_confusion_matrix": [
+        [
+          381,
+          300,
+          28
+        ],
+        [
+          405,
+          291,
+          25
+        ],
+        [
+          24,
+          54,
+          5
+        ]
+      ],
+      "normalized_row_percentages": [
+        [
+          53.74,
+          42.31,
+          3.95
+        ],
+        [
+          56.17,
+          40.36,
+          3.47
+        ],
+        [
+          28.92,
+          65.06,
+          6.02
+        ]
+      ],
+      "per_class_summary": {
+        "No Stress": {
+          "TP": 381,
+          "FP": 429,
+          "FN": 328,
+          "TN": 375,
+          "precision": 0.4704,
+          "recall": 0.5374,
+          "f1_score": 0.5017,
+          "support": 709
+        },
+        "Mild Stress": {
+          "TP": 291,
+          "FP": 354,
+          "FN": 430,
+          "TN": 438,
+          "precision": 0.4512,
+          "recall": 0.4036,
+          "f1_score": 0.4261,
+          "support": 721
+        },
+        "Severe Stress": {
+          "TP": 5,
+          "FP": 53,
+          "FN": 78,
+          "TN": 1377,
+          "precision": 0.0862,
+          "recall": 0.0602,
+          "f1_score": 0.0709,
+          "support": 83
+        }
+      }
+    }
+  }
+}

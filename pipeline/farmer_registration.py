@@ -128,6 +128,19 @@ def register_farmer_from_pin(
                     %s,
                     %s
                 )
+                ON CONFLICT (mobile_number) DO UPDATE SET
+                    farmer_name = EXCLUDED.farmer_name,
+                    village = EXCLUDED.village,
+                    district = EXCLUDED.district,
+                    state = EXCLUDED.state,
+                    preferred_language = EXCLUDED.preferred_language,
+                    crop_name = EXCLUDED.crop_name,
+                    farm_area = EXCLUDED.farm_area,
+                    farm_area_unit = EXCLUDED.farm_area_unit,
+                    polygon = EXCLUDED.polygon,
+                    pin = EXCLUDED.pin,
+                    boundary_source = EXCLUDED.boundary_source,
+                    area_source = EXCLUDED.area_source
                 RETURNING 
                     id, 
                     farmer_name, 
